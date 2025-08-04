@@ -13,9 +13,10 @@ public class Main {
 
 		int possible = 0; // 방 배정 실패 
 
+        // i: A방 수, j: B방 수, k: C방 수
 		for (int i = 0; i <= N / A; i++) {
-			for (int j = 0; j < N / B; j++) {
-				for (int k = 0; k < N / C; k++) {
+			for (int j = 0; j <= N / B; j++) {
+				for (int k = 0; k <= N / C; k++) {
 					// 빈 침대 없이 정확하게 할당 가능한가?????
 					if (i * A + j * B + k * C == N) {
 						possible = 1; //방 배정 성공 
