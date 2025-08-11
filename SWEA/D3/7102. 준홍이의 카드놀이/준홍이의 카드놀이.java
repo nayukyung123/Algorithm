@@ -11,8 +11,8 @@ public class Solution {
 		int T = sc.nextInt();
 
 		for (int tc = 1; tc <= T; tc++) {
-			int N = sc.nextInt(); // 첫 번째 카드 세트
-			int M = sc.nextInt(); // 두 번째 카드 세트
+			int N = sc.nextInt(); // 첫번째 카드세트
+			int M = sc.nextInt(); // 두번째 카드세트
 
 			int lo = Math.min(N, M) + 1;// 최빈 합의 시작
 			int hi = Math.max(N, M) + 1;// 최빈 합의 끝
