@@ -1,30 +1,27 @@
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 
-        String word = sc.next().toUpperCase(); // 대소문자 구분X → 전부 대문자로 변환
-        int[] count = new int[26]; // A~Z 개수 저장
+		String s = sc.next().toUpperCase();
+		int[] count = new int[26];
+		for (int i = 0; i < s.length(); i++) {
+			count[s.charAt(i) - 'A']++;  // 알파벳  -> int
+		}
+		int max = 0;
+		char result = '?'; //char = 문자 한 개 , String 문자 여러 개 
 
-        // 각 알파벳 등장 횟수 세기
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            count[c - 'A']++;
-        }
+		for (int i = 0; i < count.length; i++) {
+			if (count[i] > max) {
+				max = count[i];
+				result = (char) (i + 'A'); // int -> 알파벳
+			} else if (max == count[i]) {
+				result = '?';
+			}
+		}
+		System.out.println(result);
 
-        // 최댓값 찾기
-        int max = 0;
-        char answer = '?';
-        for (int i = 0; i < 26; i++) {
-            if (count[i] > max) {
-                max = count[i];
-                answer = (char) (i + 'A');
-            } else if (count[i] == max) {
-                answer = '?'; // 최댓값이 같은 경우
-            }
-        }
+	}
 
-        System.out.println(answer);
-    }
 }
