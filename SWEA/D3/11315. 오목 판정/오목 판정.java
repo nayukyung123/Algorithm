@@ -23,7 +23,7 @@ public class Solution {
             }
 
             String result = "NO";
-            boolean found = false;
+            boolean found = false; // 한번이라도 오목을 완성시키면 즉시 탐색 종료
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     // char 배열이므로 == 로 비교 가능
