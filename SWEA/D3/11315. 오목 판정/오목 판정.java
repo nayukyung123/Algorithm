@@ -23,7 +23,7 @@ public class Solution {
             }
 
             String result = "NO";
-            outerLoop: // 3중 반복문을 한번에 탈출하기 위한 label
+            boolean found = false;
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     // char 배열이므로 == 로 비교 가능
@@ -32,7 +32,8 @@ public class Solution {
                         for (int d = 0; d < 4; d++) {
                             if (isOmok(i, j, d)) {
                                 result = "YES";
-                                break outerLoop; // YES를 찾으면 모든 반복 종료
+                                found = true;
+								break;
                             }
                         }
                     }
