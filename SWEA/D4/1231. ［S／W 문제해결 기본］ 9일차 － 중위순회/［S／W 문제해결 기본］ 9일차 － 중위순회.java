@@ -1,40 +1,39 @@
-
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Solution {
 
-	private static char[] inputArr;
-	private static int N;
+	static int n; // 정점 수
+	static char[] tree; // 노드 문자 저장 배열
 
-	public static void main(String[] args) throws FileNotFoundException {
-		
+	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
-		int T = 10;
-
-		for (int tc = 1; tc <= T; tc++) {
-			N = sc.nextInt(); //정점의 총수
-			inputArr = new char[N+1];// 0번째를 버리고 1번 인덱스부터 정점으로 사용가능
-            // StringToknizer를 사용해서 다음 문자열이 있는지 체크해서 받기
-			sc.nextLine();
-			for (int i = 1; i <= N ; i++) {
-				StringTokenizer st = new StringTokenizer(sc.nextLine());
-				st.nextToken();
-				inputArr[i] = st.nextToken().charAt(0);
+		for (int tc = 1; tc <= 10; tc++) {
+			n = sc.nextInt(); // 정점 개수
+			tree = new char[n + 1]; // 1번부터 n번까지 사용
+			
+			//각 노드 정보 입력(노드번호, 문자, 자식정보)
+			for (int i = 1; i <=n; i++) {
+				sc.nextInt(); // 노드번호 버리기
+				tree[i] = sc.next().charAt(0); // 문자만 저장 
+				sc.nextLine(); // 자식정보 버리기
+				
 			}
+
 			System.out.print("#" + tc + " ");
-			inOrder(1);
+			inorder(1); // 루트(1)부터 중위순회 시작
 			System.out.println();
+
 		}
 	}
-// 방문체크, 범위를 벗어나지 않았는지, 자식노드가 더 존재하는지 등 체크가능
-	private static void inOrder(int i) {
-		if (i <= N) {
-			inOrder(i * 2);// 중위순회 이므로 좌측자식노드부터 끝까지 탐색
-			System.out.print(inputArr[i]);// 좌측노드 탐색후 부모노드의 값을 출력
-			inOrder(i * 2 + 1); // 부모노드 탐색후 우측노트 탐색
-		}
-		
+
+	static void inorder(int idx) {
+		if (idx > n)  // 범위 벗어나면 종료
+			return;// 더 이상 노드가 없으면 종료
+		inorder(idx * 2); // 왼쪽 자식
+		System.out.print(tree[idx]); // 현재 노드 출력
+		inorder(idx * 2 + 1); // 오른쪽 자식
 	}
+
 }
