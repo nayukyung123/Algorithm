@@ -1,43 +1,42 @@
-
-import java.util.*;
 import java.io.*;
-import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Main {
-	static List<List<Integer>> graph = new ArrayList<>();
+
+	static int N, M, V, a, b;
+	static List<Integer>[] graph;
 	static boolean[] visited;
-	static int N, M, V;
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		N = sc.nextInt();
-		M = sc.nextInt();
-		V = sc.nextInt();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		V = Integer.parseInt(st.nextToken());
 
+		graph = new ArrayList[N + 1];
 		for (int i = 0; i <= N; i++) {
-			graph.add(new ArrayList<>());
+			graph[i] = new ArrayList<>();
 		}
 
 		for (int i = 0; i < M; i++) {
-			int a = sc.nextInt();
-			int b = sc.nextInt();
+			st = new StringTokenizer(br.readLine());
 
-			graph.get(a).add(b);
-			graph.get(b).add(a);
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+
+			graph[a].add(b);
+			graph[b].add(a);
+
 		}
-
-		// 작은 것을 먼저 방문 하기 위해 정렬
-		for (int i = 1; i <= N; i++) {
-			Collections.sort(graph.get(i));
+		for (int i = 0; i <= N; i++) {
+			Collections.sort(graph[i]);
 		}
-
-		// DFS
 		visited = new boolean[N + 1];
 		dfs(V);
-		
-		System.out.println(); // 줄바꿈
 
-		// BFS
+		System.out.println();
+
 		visited = new boolean[N + 1];
 		bfs(V);
 
@@ -45,31 +44,33 @@ public class Main {
 
 	private static void dfs(int node) {
 		visited[node] = true;
-		System.out.print(node + " ");
 
-		for (int next : graph.get(node)) { 
+		System.out.print(node + " ");
+		for (int next : graph[node]) {
 			if (!visited[next]) {
 				dfs(next);
 			}
-
 		}
 	}
 
-	private static void bfs(int start) {
+	private static void bfs(int V) {
 		Queue<Integer> q = new LinkedList<>();
-		q.add(start);
-		visited[start] = true;
+		q.offer(V);
+		visited[V] = true;
 
 		while (!q.isEmpty()) {
 			int cur = q.poll();
 			System.out.print(cur + " ");
 
-			for (int next : graph.get(cur)) {
+			for (int next : graph[cur]) {
 				if (!visited[next]) {
 					visited[next] = true;
-					q.add(next);
+					q.offer(next);
 				}
 			}
+
 		}
+
 	}
+
 }
