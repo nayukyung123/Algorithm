@@ -4,45 +4,50 @@ import java.util.*;
 public class Main {
 
 	static int N, K;
+	static int[] dist;
 	static boolean[] visited;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
+		StringTokenizer st = new StringTokenizer(br.readLine());
 
-		st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
 		K = Integer.parseInt(st.nextToken());
+
 		visited = new boolean[100001];
 
-		System.out.println(bfs(N, K));
+		dist = new int[100001];
+
+		bfs(N);
+		
+		System.out.println(dist[K]);
+
 	}
 
-	private static int bfs(int start, int target) {
-		Queue<int[]> q = new LinkedList<>();
-		q.offer(new int[] {start,0});
+	private static void bfs(int start) {
+		Queue<Integer> q = new LinkedList<>();
+		q.offer(start);
 		visited[start] = true;
-		
+
 		while (!q.isEmpty()) {
-			int[] cur = q.poll();
-			int pos = cur[0];
-			int time = cur[1];
+			int cur = q.poll();
+
+			if (cur == K)
+				return;
+
+			int[] nextMoves = { cur - 1, cur + 1, cur * 2 };
 			
-			if(pos == target) return time;
-			
-			int[] moves = {pos-1, pos +1, pos * 2};
-			for (int i : moves) {
-				if (i >=0 && i <= 100000&& !visited[i]) {
-					visited[i] = true;
-					q.offer(new int[] {i,time+1});
-					
+			for (int next : nextMoves) {
+				if (next >=0 && next<=100000 && !visited[next]) {
+					visited[next] = true;
+					dist[next] = dist[cur] + 1;
+					q.add(next);
+
 				}
 			}
 			
-			
+
 		}
-		return -1;
-		
-		
+
 	}
 }
