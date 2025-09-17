@@ -1,29 +1,29 @@
-
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Solution {
-
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int T = sc.nextInt();
-
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int T = Integer.parseInt(br.readLine());
 		for (int tc = 1; tc <= T; tc++) {
-			String str = sc.next();
-			int strLen = 0;
+			String str = br.readLine(); 
+			int strLen = str.length();
+			int ans = 0; 
 			
-			for (int len = 1; len <= 10; len++) {
-				String pattern = str.substring(0,len);
-				String next = str.substring(len, 2 * len);
+			for (int i = 1; i <= 10; i++) {
+				String pattern = str.substring(0, i); 
+				String check = str.substring(i, i+i);
 				
-				if(pattern.equals(next)) {
-					strLen = len;
+				if (pattern.equals(check)) {
+					ans = i;
 					break;
 				}
+				
 			}
-			System.out.println("#" + tc + " " + strLen);
+			System.out.println("#" + tc + " " + ans);
 		}
-
+		
 	}
 
 }
