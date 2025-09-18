@@ -2,22 +2,21 @@ import java.io.*;
 import java.util.*;
 
 public class Solution {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int T = sc.nextInt();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(br.readLine());
 
 		for (int tc = 1; tc <= T; tc++) {
-			String s = sc.next();
-			int ans = 1;
+			String str = br.readLine();
+			int len = str.length();
+			// 문자열 뒤집기
+			String backstr = new StringBuilder(str).reverse().toString();
 
-			for (int i = 0; i < s.length(); i++) {
-				if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {
-					ans = 0;
-					break;
-				}
-			}
-			System.out.println("#" + tc + " " + ans);
-
+			// str = backstr -> 회문이니까 1출력
+			if (str.equals(backstr)) {
+				System.out.println("#" + tc + " " + "1");
+			} else
+				System.out.println("#" + tc + " " + "0");
 		}
 
 	}
