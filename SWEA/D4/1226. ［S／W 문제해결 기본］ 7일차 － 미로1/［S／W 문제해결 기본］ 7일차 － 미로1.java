@@ -25,7 +25,7 @@ public class Solution {
             ans = 0;
             visited = new boolean[16][16];
 
-            // 시작점(2)에서 DFS 시작
+  
             for (int i = 0; i < 16; i++) {
                 for (int j = 0; j < 16; j++) {
                     if (map[i][j] == 2) {
@@ -40,9 +40,7 @@ public class Solution {
     }
 
     private static void dfs(int r, int c) {
-       
-
-        if (map[r][c] == 3) { // 도착점
+        if (map[r][c] == 3) {
             ans = 1;
             return;
         }
