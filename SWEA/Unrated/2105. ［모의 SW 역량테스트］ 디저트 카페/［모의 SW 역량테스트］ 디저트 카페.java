@@ -40,7 +40,7 @@ public class Solution {
             int nr = r + dr[d];
             int nc = c + dc[d];
 
-            if (nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
+            if (nr >= 0 && nr < N && nc >= 0 && nc < N) {
 
             if (nr == startR && nc == startC && d == 3 && count >= 4) {
                 ans = Math.max(ans, count);
@@ -52,6 +52,7 @@ public class Solution {
                 dfs(nr, nc, startR, startC, d, count + 1); 
                 dessert[map[nr][nc]] = false;            
             }
+        }
         }
     }
 }
