@@ -13,7 +13,7 @@ public class Solution {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         for (int tc = 1; tc <= 10; tc++) {
-            br.readLine();
+            br.readLine(); // 테스트케이스 번호 버리기
 
             for (int i = 0; i < 16; i++) {
                 String line = br.readLine();
@@ -40,9 +40,9 @@ public class Solution {
     }
 
     private static void dfs(int r, int c) {
-        if (ans == 1) return; 
+       
 
-        if (map[r][c] == 3) { 
+        if (map[r][c] == 3) { // 도착점
             ans = 1;
             return;
         }
