@@ -20,16 +20,18 @@ public class Solution {
 			N = Integer.parseInt(br.readLine()); // 한변의 길이 입력받음
 
 			cheese = new int[N][N]; // 치즈 배열 초기화
+			int maxCheese = 0; // 입력 치즈 값 중 최대값
 			for (int i = 0; i < N; i++) {
 				StringTokenizer st = new StringTokenizer(br.readLine());
 				for (int j = 0; j < N; j++) {
 					cheese[i][j] = Integer.parseInt(st.nextToken());
+					maxCheese = Math.max(maxCheese, cheese[i][j]);
 				}
 			} // 치즈 완성
 
-			// ->0~100일 진행
+			// ->0 ~ maxCheese일 진행
 			max = 0;
-			for (int day = 0; day <= 100; day++) {
+			for (int day = 0; day <= maxCheese; day++) {
 				visited = new boolean[N][N];
 				cheeseCnt = 0; // 하루 마다 덩어리 세야하니까 day 반복문 에서 초기화
 
