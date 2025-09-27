@@ -2,45 +2,56 @@ import java.io.*;
 import java.util.*;
 
 public class Solution {
-	private static int N, L; // 재료의 수, 제한 칼로리
-	private static int[] score; // 맛 점수
-	private static int[] cal; // 칼로리
-	private static int max; // 최대 점수
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int T = sc.nextInt();
+	static int N, L, TA, K;// 재료의 수, 제한 칼로리, 맛점수, 칼로리
+	static int max; // 최고의 맛 점수
+	static int[] taste;
+	static int[] cal;
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		int T = Integer.parseInt(br.readLine());
 
 		for (int tc = 1; tc <= T; tc++) {
-			N = sc.nextInt();
-			L = sc.nextInt();
-			score = new int[N];
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			N = Integer.parseInt(st.nextToken());
+			L = Integer.parseInt(st.nextToken());
+
+			taste = new int[N];
 			cal = new int[N];
-			max = 0;
-			
 			for (int i = 0; i < N; i++) {
-				score[i] = sc.nextInt();
-				cal[i] = sc.nextInt();
+				st = new StringTokenizer(br.readLine());
+				TA = Integer.parseInt(st.nextToken());
+				K = Integer.parseInt(st.nextToken());
+
+				taste[i] = TA;
+				cal[i] = K;
 			}
 
-			subset(0, 0, 0); // idx, 총점, 총 칼로리
-			System.out.println("#" + tc + " " + max);
+			max = 0;
+			dfs(0, 0, 0);// 현재 어디까지 선택했는지, 점수합, 칼로리합
+			System.out.println("#" + tc + " " + max); 
 
 		}
+
 	}
 
-	static void subset(int idx, int sumScore, int sumCal) {
-		// 기저 조건
-		if (sumCal > L) // 칼로리 초과 -> 가지치기
+	private static void dfs(int idx, int sumTaste, int sumCal) {
+		// 제한칼로리 N에 근접하면 리턴한다.....
+		if (sumCal > L) {
 			return;
-		if (idx == N) { // 모든 재료 고려 끝
-			max = Math.max(max, sumScore);
-			return;
-
 		}
-		// 현재 재료 선택
-		subset(idx + 1, sumScore + score[idx], sumCal + cal[idx]);
-		// 현재 재료 선택 안 함
-		subset(idx + 1, sumScore, sumCal);
+
+		// 맛 배열 중에 최고의 점수를 내는 조합
+		if(idx == N) {
+			max = Math.max(max, sumTaste);
+			return;
+		}
+		
+		dfs(idx+1, sumTaste+taste[idx], sumCal+ cal[idx]);
+		
+		dfs(idx+1, sumTaste,sumCal);
+
 	}
 }
