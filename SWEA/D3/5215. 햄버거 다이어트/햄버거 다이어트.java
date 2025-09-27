@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Solution {
 
-	static int N, L, TA, K;// 재료의 수, 제한 칼로리, 맛점수, 칼로리
+	static int N, L;// 재료의 수, 제한 칼로리
 	static int max; // 최고의 맛 점수
 	static int[] taste;
 	static int[] cal;
@@ -22,16 +22,14 @@ public class Solution {
 			cal = new int[N];
 			for (int i = 0; i < N; i++) {
 				st = new StringTokenizer(br.readLine());
-				TA = Integer.parseInt(st.nextToken());
-				K = Integer.parseInt(st.nextToken());
+				taste[i] = Integer.parseInt(st.nextToken());
+				cal[i] = Integer.parseInt(st.nextToken());
 
-				taste[i] = TA;
-				cal[i] = K;
 			}
 
 			max = 0;
 			dfs(0, 0, 0);// 현재 어디까지 선택했는지, 점수합, 칼로리합
-			System.out.println("#" + tc + " " + max); 
+			System.out.println("#" + tc + " " + max);
 
 		}
 
@@ -44,14 +42,14 @@ public class Solution {
 		}
 
 		// 맛 배열 중에 최고의 점수를 내는 조합
-		if(idx == N) {
+		if (idx == N) {
 			max = Math.max(max, sumTaste);
 			return;
 		}
-		
-		dfs(idx+1, sumTaste+taste[idx], sumCal+ cal[idx]);
-		
-		dfs(idx+1, sumTaste,sumCal);
+
+		dfs(idx + 1, sumTaste + taste[idx], sumCal + cal[idx]);
+
+		dfs(idx + 1, sumTaste, sumCal);
 
 	}
 }
