@@ -1,37 +1,45 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
-
+//교착상태 ans 
+//1 -> 2이 되면 ans++
+//열을 시준으로 세로 탐색
+//열을 고정하고 행을 위->아래로 스킨 후 1 만난후 2 만나면 ans++
 public class Solution {
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		for (int tc = 1; tc <= 10; tc++) {
-			int N = sc.nextInt();
-			int[][] arr = new int[N][N];
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < N; j++) {
-					arr[i][j] = sc.nextInt();
+			int n = Integer.parseInt(br.readLine());
+			int[][] table = new int[n][n];
+
+			for (int i = 0; i < table.length; i++) {
+				StringTokenizer st = new StringTokenizer(br.readLine());
+				for (int j = 0; j < table.length; j++) {
+					table[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
-			
-			int count = 0;
-			for (int c = 0; c < N; c++) {
-				boolean seenOne = false; 
-				for (int r = 0; r < N; r++) {
-					int v = arr[r][c];
-					if (v == 1) {
-						seenOne = true; 
-					} else if (v == 2 && seenOne) {
-						count++; 
-						seenOne = false; 
+
+			int ans = 0;// 교착상태
+
+			for (int y = 0; y < table.length; y++) { // 열(가로) 고정
+				boolean hasN = false;
+
+				for (int x = 0; x < table.length; x++) {
+
+					if (table[x][y] == 1)
+						hasN = true;
+					if (table[x][y] == 2 && hasN) {
+						ans++;
+						hasN = false;
 					}
+
 				}
 			}
-			System.out.println("#" + tc + " " + count);
-
+			System.out.println("#" + tc + " " + ans);
 		}
-
 	}
 }
