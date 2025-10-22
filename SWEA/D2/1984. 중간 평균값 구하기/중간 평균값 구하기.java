@@ -46,7 +46,7 @@ public class Solution {
 			sum -= max;
 			sum -= min;
 			
-			// 평균 값(소수점 첫째 자리까지)
+			// 평균 값
 			int avg = (int) Math.round(sum / 8.0);
 			
 			System.out.println("#" + tc + " " + avg);
