@@ -2,7 +2,8 @@ import java.io.*;
 import java.util.*;
 
 // BFS
-// 아기상어 
+// 아기상어 ]
+// BFS로 최단거리 물고기 탐색 후 이동·성장 시뮬레이션
 public class Main {
     static int n;
     static int[][] map;
