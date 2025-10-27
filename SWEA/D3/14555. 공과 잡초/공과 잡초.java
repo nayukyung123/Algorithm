@@ -1,37 +1,34 @@
-
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
 
-class Solution {
+public class Solution {
 
-	public static void main(String args[]) throws Exception {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine());
-		for (int test_case = 1; test_case <= T; test_case++) {
-			String str = br.readLine();
 
-			int result = 0;
+		for (int tc = 1; tc <= T; tc++) {
+			String S = br.readLine();
+			// 만약 ( 다음 | 이거나 ) 이거면
+			// 잡초 수 증가
+			// 문장의 한글자...
 
-			for (int index = 0; index < str.length(); index++) {
-				char c = str.charAt(index);
+			int cnt = 0; // 잡초
+			for (int i = 0; i < S.length() - 1; i++) {
+				char c = S.charAt(i);
 				if (c == '(') {
-
-					result++; // 열린 괄호면 공으로 간주
-				} else if (c == ')') {
-                    // 현재 문자가 닫는 괄호 ')'일 때
-                    // 이전 문자가 '|'이면 카운트 증가
-                    // (index > 0 조건: 이전 문자가 존재해야 함)
-					if (index > 0 && str.charAt(index - 1) == '|') {
-
-						result++;
+					if (S.charAt(i+1) == '|' || S.charAt(i+1) == ')') {
+						cnt++;
 					}
 				}
-
+				if( c =='|') {
+					if(S.charAt(i+1) == ')')
+						cnt++;
+				}
+					
 			}
-			System.out.println("#" + test_case + " " + result);
-
+			System.out.println("#" + tc + " " + cnt);
 		}
 	}
-
 }
