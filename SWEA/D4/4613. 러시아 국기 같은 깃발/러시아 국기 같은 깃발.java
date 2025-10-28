@@ -24,8 +24,8 @@ public class Solution {
 
 			int min = Integer.MAX_VALUE;// 새로 칠해야 하는 칸의 최소값
 
-			for (int i = 0; i < n - 2; i++) {
-				for (int j = i + 1; j < n - 1; j++) {
+			for (int i = 0; i < n - 2; i++) { // 여기까지 흰색임 
+				for (int j = i + 1; j < n - 1; j++) {// 여기까지 파랑임 (나머지는 빨강임)
 					int count = 0; // 색을 칠해야 한다면 카운트를 증가시킨다
 
 					for (int r = 0; r <= i; r++) {
@@ -50,9 +50,9 @@ public class Solution {
 					} // 빨간색 칠하기
 					
 					min = Math.min(min, count);
-				} // 파란
+				} 
 				
-			} // 흰
+			} 
 			System.out.println("#" + tc + " " + min);
 
 		}
