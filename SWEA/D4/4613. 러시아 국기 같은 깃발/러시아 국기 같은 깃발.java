@@ -13,7 +13,7 @@ public class Solution {
 			int n = Integer.parseInt(st.nextToken()); // 행과 열
 			int m = Integer.parseInt(st.nextToken());
 
-			// 문자열을 입력 받는다
+
 			char[][] map = new char[n][m];
 			for (int i = 0; i < n; i++) {
 				String line = br.readLine();
