@@ -5,10 +5,10 @@ import java.util.StringTokenizer;
 
 public class Solution {
 
-	static int[] drPlus = { -1, 1, 0, 0 };
-	static int[] dcPlus = { 0, 0, -1, 1 };
-	static int[] drX = { -1, -1, 1, 1 };
-	static int[] dcX = { -1, 1, -1, 1 };
+	static int[] dr = { -1, 1, 0, 0 };
+	static int[] dc = { 0, 0, -1, 1 };
+	static int[] dirR = { -1, -1, 1, 1 };
+	static int[] dirC = { -1, 1, -1, 1 };
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -16,57 +16,57 @@ public class Solution {
 
 		for (int tc = 1; tc <= T; tc++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
-			int N = Integer.parseInt(st.nextToken());
-			int M = Integer.parseInt(st.nextToken());
+			int n = Integer.parseInt(st.nextToken()); // 크기
+			int m = Integer.parseInt(st.nextToken()); // 스프레이 분사
 
-			int[][] map = new int[N][N];
-			for (int i = 0; i < map.length; i++) {
+			int[][] arr = new int[n][n];
+			for (int i = 0; i < n; i++) {
 				st = new StringTokenizer(br.readLine());
-				for (int j = 0; j < map.length; j++) {
-					map[i][j] = Integer.parseInt(st.nextToken());
+				for (int j = 0; j < n; j++) {
+					arr[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
 
+			// 스프레이 뿌리자
+			// + 모양
 			int sumPlus = 0;
 			int sumX = 0;
 			int max = 0;
 
-			for (int r = 0; r < map.length; r++) {
-				for (int c = 0; c < map.length; c++) {
-					sumPlus = map[r][c];
-					sumX = map[r][c];
-
+			for (int r = 0; r < n; r++) {
+				for (int c = 0; c < n; c++) {
+					sumPlus = arr[r][c];
+					sumX = arr[r][c];
 					// + 모양
 					for (int d = 0; d < 4; d++) {
-						for (int m = 1; m < M; m++) {
-							int nr = r + drPlus[d] * m;
-							int nc = c + dcPlus[d] * m;
+						for (int M = 1; M < m; M++) {
+							int nr = r + dr[d] * M;
+							int nc = c + dc[d] * M;
 
-							if (nr >= 0 && nc >= 0 && nr < N && nc < N) {
-								sumPlus += map[nr][nc];
+							if (nr >= 0 && nc >= 0 && nr < n && nc < n) {
+								sumPlus += arr[nr][nc];
 							}
 
 						}
-
 					}
 
 					// x 모양
 					for (int d = 0; d < 4; d++) {
-						for (int m = 1; m < M; m++) {
-							int nr = r + drX[d] * m;
-							int nc = c + dcX[d] * m;
+						for (int M = 1; M < m; M++) {
+							int nr = r + dirR[d] *M;
+							int nc = c + dirC[d] * M;
 
-							if (nr >= 0 && nc >= 0 && nr < N && nc < N) {
-								sumX += map[nr][nc];
+							if (nr >= 0 && nc >= 0 && nr < n && nc < n) {
+								sumX += arr[nr][nc];
 							}
 
 						}
 					}
-
 					max = Math.max(max, Math.max(sumPlus, sumX));
 
 				}
 			}
+
 			System.out.println("#" + tc + " " + max);
 
 		}
