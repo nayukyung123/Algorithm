@@ -9,30 +9,29 @@ public class Main {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		int N = Integer.parseInt(br.readLine());
-		int[][] points = new int[N][2];
+		int n = Integer.parseInt(br.readLine());
+		int[][] arr = new int[n][2];
 
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < n; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
-			points[i][0] = Integer.parseInt(st.nextToken());
-			points[i][1] = Integer.parseInt(st.nextToken());
+			arr[i][0] = Integer.parseInt(st.nextToken());
+			arr[i][1] = Integer.parseInt(st.nextToken());
 		}
 
-		Arrays.sort(points, (o1, o2) -> {
-			if (o1[0] == o2[0]) {
-				return o1[1] - o2[1];
-			} else {
-				return o1[0] - o2[0];
-
+		Arrays.sort(arr, (a, b) -> {
+			// x좌표가 같다면 y 를 오름
+			if (a[0] == b[0]) {
+				return Integer.compare(a[1], b[1]);
 			}
+			// 같지 않다면 그냥 오름
+			return Integer.compare(a[0], b[0]);
 		});
-
+		
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < N; i++) {
-			sb.append(points[i][0] + " " + points[i][1]).append('\n');
+		for (int[] pair : arr) {
+			sb.append(pair[0]).append(" ").append(pair[1]).append("\n");
 		}
-		System.out.println(sb);
+		System.out.println(sb.toString());
 
 	}
-
 }
