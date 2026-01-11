@@ -1,36 +1,37 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList; // 수정
+import java.util.Collections; // 추가
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List; // 수정
 import java.util.Set;
 
 public class Main {
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		int n = Integer.parseInt(br.readLine());// 단어 갯수 받기
+        int n = Integer.parseInt(br.readLine());
+        Set<String> set = new HashSet<>();
 
+        for (int i = 0; i < n; i++) {
+            set.add(br.readLine());
+        }
 
-		Set<String> set = new HashSet<>();
-		for (int i = 0; i < n; i++) {
-			set.add(br.readLine());
-		}
-		
-		String[] words = set.toArray(new String[set.size()]);
+        List<String> list = new ArrayList<>(set);
 
-		Arrays.sort(words, (s1, s2) -> {
-			if (s1.length() == s2.length()) {
-				return s1.compareTo(s2);
-			}
-			return s1.length() - s2.length();
-		});
+        // Collections.sort를 사용하거나 list.sort 사용
+        Collections.sort(list, (a, b) -> {
+            if (a.length() != b.length()) {
+                return a.length() - b.length();
+            }
+            return a.compareTo(b);
+        });
 
-		for (String word : words) {
-			System.out.println(word);
-
-		}
-
-	}
+        StringBuilder sb = new StringBuilder();
+        for (String s : list) {
+            sb.append(s).append("\n");
+        }
+        System.out.print(sb.toString());
+    }
 }
